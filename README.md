@@ -87,15 +87,15 @@ Then open [http://localhost:5173](http://localhost:5173) to view it in the brows
 ## 📁 Project Structure
 
 ```
-ar-passwizard-react-localStorage/
+QRcodegenerator-react/
 ├── public
 │   |── icons/
 │   └── images/
 ├── src/
 │   ├── assets/
-│   ├── components
-            |── QRCodeGen.jsx
-            └── Footer.jsx
+│   ├── components/
+│   │   ├── QRCodeGen.jsx
+│   │   └── Footer.jsx
 │   ├── App.jsx
 │   ├── main.jsx
 │   └── index.css
@@ -141,7 +141,7 @@ You can deploy this app using:
 
 - [React](https://reactjs.org/)
 - [Vite](https://vitejs.dev/)
-- [Tailwind CSS](https://tailwindcss.com/) (optional)
+- [Tailwind CSS](https://tailwindcss.com/) 
 - [React-toastify](https://www.npmjs.com/package/react-toastify?activeTab=readme)
 - [React-qr-code](https://www.npmjs.com/package/qrcode)
 
@@ -169,7 +169,7 @@ See the [LICENSE](./LICENSE) file for details.
 
 ---
 
-## 📷 Screenshots (Optional)
+## 📷 Screenshots
 
 <p align="center">
   <img src="./public/images/SSQRCodeApp.png" alt="App Screenshot" width="700" />
