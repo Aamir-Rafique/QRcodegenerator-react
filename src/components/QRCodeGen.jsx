@@ -2,12 +2,23 @@ import React from 'react'
 import { useState, useEffect } from 'react';
 import QRCode from 'react-qr-code';
 import { ToastContainer, toast } from 'react-toastify';
-import { TailSpin } from 'react-loader-spinner';
+import { CSSProperties } from "react";
+import { ClipLoader } from "react-spinners";
+
+const override = {
+    display: "block",
+    margin: "0 auto",
+    borderColor: "red",
+};
+
 
 const QRcodeGenerator = () => {
     const [qrCode, setqrCode] = useState('Please Input text or Website URL to generate QR Code!');
     const [input, setinput] = useState('');
     const [isLoading, setisLoading] = useState(true);
+
+    // for spinner: 
+    let [color, setColor] = useState("#ffffff");
 
     const handleGenQRCode = (e) => {
 
@@ -29,7 +40,7 @@ const QRcodeGenerator = () => {
         }, 1200);
     }, [handleGenQRCode])
 
-  
+
     return (
         <>
             <ToastContainer
@@ -53,11 +64,16 @@ const QRcodeGenerator = () => {
                     <div>
                         {
                             isLoading ?
-                                <TailSpin height="50" width="50" color="blue" ariaLabel="loading" />
-                                :
+                                <ClipLoader
+                                    color={color}
+                                    loading={isLoading}
+                                    cssOverride={override}
+                                    size={80}
+                                    aria-label="Loading Spinner"
+                                    data-testid="loader"
+                                /> :
                                 <QRCode value={qrCode} bgColor="#a5f7e7" />
                         }
-
                     </div>
                 </div>
             </div>
