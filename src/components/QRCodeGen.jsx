@@ -59,7 +59,10 @@ const QRcodeGenerator = () => {
         ctx.fillRect(0, 0, canvas.width, canvas.height);
         
         img.onload = () => {
-            ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+            // Add padding equivalent to p-1 (4px scaled to 256px canvas = ~4px)
+            const padding = 4;
+            const qrSize = canvas.width - (padding * 2);
+            ctx.drawImage(img, padding, padding, qrSize, qrSize);
             const pngFile = canvas.toDataURL('image/png');
             
             // Create download link
@@ -93,7 +96,7 @@ const QRcodeGenerator = () => {
                     <form onSubmit={handleGenQRCode} className='flex flex-col md:flex-row items-center gap-5  md:gap-2'>
                         <input type="text" value={input} onChange={(e) => setinput(e.target.value)} placeholder='Input text or Website URL' className=' text-center bg-white rounded-[5px] outline-none  py-2.5 md:py-1.5 px-4 md:px-6 focus:ring-[2.5px] ring-purple-500 duration-200' /><button type='submit' title='Generate QR Code' className='bg-purple-600 hover:bg-purple-700 active:hover:bg-purple-700 active:bg-purple-600 active:ring-3 active:ring-purple-800 duration-200 text-white cursor-pointer rounded-[5px] px-2 py-1'>Generate</button>
                     </form>
-                    <div ref={qrRef}>
+                    <div ref={qrRef} className={isLoading?"":"bg-white rounded"} >
                         {
                             isLoading ?
                                 <ClipLoader
@@ -104,7 +107,7 @@ const QRcodeGenerator = () => {
                                     aria-label="Loading Spinner"
                                     data-testid="loader"
                                 /> :
-                                <QRCode value={qrCode} bgColor="#a5f7e7" />
+                                <QRCode value={qrCode}  className='p-1'/>
                         }
                     </div>
                     {!isLoading && qrCode !== 'Please Input text or Website URL to generate QR Code!' && (
